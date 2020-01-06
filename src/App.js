@@ -1,6 +1,5 @@
 import React from 'react';
-import Route from "react-router/es/Route";
-import {BrowserRouter} from "react-router-dom";
+import { Route } from "react-router"
 import './App.css';
 import Header from './components/Header/Header';
 import Navbar from './components/Navbar/Navbar';
@@ -12,14 +11,18 @@ import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div className='app-wrapper'>
         <Header/>
         <Navbar navData={props.state.navBar}/>
         <div className='app-wrapper-content'>
           <Route
             path='/profile'
-            render={() => <Profile profileData={props.state.profileData}/>}
+            render={() =>
+              <Profile
+                profileData={props.state.profileData}
+                pushPost={props.pushPost}
+                updateNewPostText={props.updateNewPostText}
+              />}
           />
           <Route
             path='/dialogs'
@@ -31,7 +34,6 @@ const App = (props) => {
           <Route path='/settings' component={Settings}/>
         </div>
       </div>
-    </BrowserRouter>
   );
 };
 

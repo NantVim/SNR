@@ -1,9 +1,3 @@
-let users = {
-  user: [
-
-  ]
-}
-
 let state = {
   profileData:{
     postData: [
@@ -11,7 +5,8 @@ let state = {
       {id: 2, message: 'It s my first post', likesCount: 11},
       {id: 3, message: 'Hi, how are you?', likesCount: 12},
       {id: 4, message: 'It s my first post', likesCount: 11}
-    ]
+    ],
+    newPostText: ''
   },
   dialogsData: {
     dialogs: [
@@ -42,6 +37,30 @@ let state = {
       }
     ]
   }
+};
+
+let renderEntireTree = () => {};
+
+export  const pushPost = (data) => {
+  let post = {
+    id: (++data.length),
+    message: state.profileData.newPostText,
+    likesCount: 0
+  };
+
+  data.push(post);
+  updateNewPostText('');
+  renderEntireTree(state);
+  return 0;
+};
+
+export const updateNewPostText = (text) => {
+  state.profileData.newPostText = text;
+  renderEntireTree(state);
+};
+
+export const subscriber = (observer) => {
+  renderEntireTree = observer; // Паттерн - observer/наблюдатель
 };
 
 export default state;

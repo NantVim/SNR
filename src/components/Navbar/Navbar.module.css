@@ -11,3 +11,17 @@
 .item a.active {
     color: gold;
 }
+
+.friendsList {
+    display: flex;
+}
+
+.friend img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10em;
+}
+
+.friend span {
+    text-align: center;
+}

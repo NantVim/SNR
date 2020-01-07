@@ -1,19 +1,22 @@
 import './index.css';
-import store from "./redux/state";
+import store from "./redux/reduxStore";
 import ReactDOM from "react-dom";
 import {BrowserRouter} from "react-router-dom";
 import App from "./App";
 import React from "react";
 
-const rerenderEntireTree = (state) => {
+const rerenderEntireTree = (store) => {
   ReactDOM.render(
     <BrowserRouter>
-      <App state={state} dispatch={store.dispatch.bind(store)}/>
+      <App store={store} />
     </BrowserRouter>, document.getElementById('root')
   );
 };
 
-//Передача функции rerenderEntireTree в state через call-back
-store.subscriber(rerenderEntireTree); // Паттерн - observer/наблюдатель
+rerenderEntireTree(store);
 
-rerenderEntireTree(store.getState());
+//Передача функции rerenderEntireTree в state через call-back
+store.subscribe( () => {
+  rerenderEntireTree(store);
+}); // Паттерн - observer/наблюдатель
+

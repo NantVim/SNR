@@ -33,7 +33,7 @@ const Navbar = (props) => {
         <div>
           <h3>Friends</h3>
           <div className={s.friendsList}>
-            {props.navData.friends.map(user => (<Friend avatar={user.avatar} name={user.name}/>))}
+            {props.state.navBar.friends.map(user => (<Friend avatar={user.avatar} name={user.name}/>))}
           </div>
         </div>
       </nav>

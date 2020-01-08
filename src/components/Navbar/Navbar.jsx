@@ -11,8 +11,10 @@ const Friend = (props) => {
   );
 };
 
+
 const Navbar = (props) => {
-	return(
+
+  return(
 		<nav className={s.nav}>
         <div className={s.item}>
           <NavLink to="/profile" activeClassName={s.active}>Profile</NavLink>
@@ -33,7 +35,7 @@ const Navbar = (props) => {
         <div>
           <h3>Friends</h3>
           <div className={s.friendsList}>
-            {props.navbar.friends.map(user => (<Friend avatar={user.avatar} name={user.name}/>))}
+            {props.friends.map(user => (<Friend avatar={user.avatar} name={user.name}/>))}
           </div>
         </div>
       </nav>

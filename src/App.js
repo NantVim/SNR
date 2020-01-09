@@ -8,6 +8,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import NavbarContainer from "./components/Navbar/NavbarContainer";
+import UserContainer from "./components/Users/UsersContainer";
 
 const App = (props) => {
   return (
@@ -26,6 +27,11 @@ const App = (props) => {
             render={() => <DialogsContainer
               store={props.store}
             />}
+          />
+
+          <Route
+            path='/users'
+            render={() => <UserContainer store={props.store}/>}
           />
 
           <Route path='/news' component={News}/>

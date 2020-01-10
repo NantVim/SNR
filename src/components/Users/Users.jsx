@@ -1,7 +1,21 @@
 import React from "react";
 import s from './Users.module.css'
+import * as axios from "axios";
+import defaultUserPhoto from '../../assets/img/defaultUserPhoto.jpg'
 
 const Users = (props) => {
+
+  const initUsers = () => {
+    if (props.users.length === 0) {
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+          .then(response => {
+            console.log(response.data)
+            props.setUsers(response.data)
+          })
+    }
+  }
+
+  initUsers();
 
   return(
     <div>
@@ -9,7 +23,7 @@ const Users = (props) => {
         return (
           <div className={s.userCard}>
             <div>
-              <span><img src={user.photoUrl} alt="photo"/></span><br/>
+              <span><img src={defaultUserPhoto} alt="photo"/></span><br/>
               <span>
                 {
                   user.followStatus === 'Follow'

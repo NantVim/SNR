@@ -3,23 +3,17 @@ import s from './Users.module.css'
 import * as axios from "axios";
 import defaultUserPhoto from '../../assets/img/defaultUserPhoto.jpg'
 
-const Users = (props) => {
-
-  const initUsers = () => {
-    if (props.users.length === 0) {
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-          .then(response => {
-            console.log(response.data)
-            props.setUsers(response.data)
-          })
-    }
+class Users extends React.Component {
+  componentDidMount() {
+    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
+      this.props.setUsers(response.data)
+    })
   }
 
-  initUsers();
-
-  return(
-    <div>
-      {props.users.map(user => {
+  render() {
+    return(
+      <div>
+        {this.props.users.map(user => {
         return (
           <div className={s.userCard}>
             <div>
@@ -27,8 +21,8 @@ const Users = (props) => {
               <span>
                 {
                   user.followStatus === 'Follow'
-                    ? <button onClick={() => props.unfollow(user.id)}>Follow</button>
-                    : <button onClick={() => props.follow(user.id)}>Unfollow</button>
+                    ? <button onClick={() => this.props.unfollow(user.id)}>Follow</button>
+                    : <button onClick={() => this.props.follow(user.id)}>Unfollow</button>
                 } </span>
             </div>
             <div>
@@ -43,7 +37,8 @@ const Users = (props) => {
         )
       })}
     </div>
-  );
-};
+    )
+  }
+}
 
 export default Users;

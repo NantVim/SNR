@@ -1,19 +1,11 @@
 import React from "react";
 import s from './Users.module.css'
-import * as axios from "axios";
 import defaultUserPhoto from '../../assets/img/defaultUserPhoto.jpg'
 
-class Users extends React.Component {
-  componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      this.props.setUsers(response.data)
-    })
-  }
-
-  render() {
-    return(
-      <div>
-        {this.props.users.map(user => {
+const Users = (props) => {
+  return (
+    <div>
+      {props.users.map(user => {
         return (
           <div className={s.userCard}>
             <div>
@@ -21,8 +13,8 @@ class Users extends React.Component {
               <span>
                 {
                   user.followStatus === 'Follow'
-                    ? <button onClick={() => this.props.unfollow(user.id)}>Follow</button>
-                    : <button onClick={() => this.props.follow(user.id)}>Unfollow</button>
+                    ? <button onClick={() => props.unfollow(user.id)}>Follow</button>
+                    : <button onClick={() => props.follow(user.id)}>Unfollow</button>
                 } </span>
             </div>
             <div>
@@ -37,8 +29,7 @@ class Users extends React.Component {
         )
       })}
     </div>
-    )
-  }
+  )
 }
 
 export default Users;

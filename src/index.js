@@ -6,20 +6,13 @@ import App from "./App";
 import React from "react";
 import {Provider} from "react-redux";
 
-const rerenderEntireTree = (store) => {
-  ReactDOM.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <App  />
-      </Provider>
-    </BrowserRouter>, document.getElementById('root')
-  );
-};
 
-rerenderEntireTree(store);
+ReactDOM.render(
+  <BrowserRouter>
+    <Provider store={store}>
+      <App/>
+    </Provider>
+  </BrowserRouter>, document.getElementById('root')
+);
 
-//Передача функции rerenderEntireTree в state через call-back
-store.subscribe( () => {
-  rerenderEntireTree(store);
-}); // Паттерн - observer/наблюдатель
 

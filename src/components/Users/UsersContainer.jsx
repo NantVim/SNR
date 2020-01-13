@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {followAC, setUsersAC, unfollowAC} from "../../redux/usersReducer";
+import {follow, setUsers, unfollow} from "../../redux/usersReducer";
 import * as axios from "axios";
 
 class UsersApiContainer extends React.Component{
@@ -22,16 +22,7 @@ class UsersApiContainer extends React.Component{
 
 let mapStateToProps = state => ({users: state.usersPage.users});
 
-let mapDispatchToProps = dispatch => {
-  return {
-    follow: userID => dispatch(followAC(userID)),
-    unfollow: userID => dispatch(unfollowAC(userID)),
-    setUsers: users => dispatch(setUsersAC(users))
-  }
-};
-
-
-
-const UserContainer = connect(mapStateToProps, mapDispatchToProps)(UsersApiContainer);
+const UserContainer = connect(mapStateToProps,
+  {follow, unfollow, setUsers})(UsersApiContainer);
 
 export default UserContainer;

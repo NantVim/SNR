@@ -2,12 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
 import {follow, setUsers, unfollow} from "../../redux/usersReducer";
-import * as axios from "axios";
+import {getUsers} from "../../api/api";
 
 class UsersApiContainer extends React.Component{
   componentDidMount() {
-    axios.get('https://social-network.samuraijs.com/api/1.0/users').then(response => {
-      this.props.setUsers(response.data)
+    getUsers().then(data => {
+      this.props.setUsers(data)
     })
   }
 
@@ -23,6 +23,6 @@ class UsersApiContainer extends React.Component{
 let mapStateToProps = state => ({users: state.usersPage.users});
 
 const UserContainer = connect(mapStateToProps,
-  {follow, unfollow, setUsers})(UsersApiContainer);
+  {follow, unfollow, setUsers,})(UsersApiContainer);
 
 export default UserContainer;

@@ -1,10 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
 
 let initialState = {
-  users: []
+  users: [],
+  isFetching: true,
+  followingInProgress: false
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -36,8 +40,14 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         users: [...action.users.items]
       }
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        followingInProgress: action.isFetching
+      }
 
-    default: return state
+    default:
+      return state
   }
 };
 
@@ -52,5 +62,8 @@ export const unfollow = (userID) => {
 export const setUsers = users => {
   return {type: SET_USERS, users}
 }
+
+export const toggleIsFollowingProgress = isFetching =>
+  ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching});
 
 export default usersReducer;

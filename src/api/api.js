@@ -18,3 +18,12 @@ export const getUserProfile = userId => {
       return response.data
     })
 }
+
+// export const unfollowAPI = (userID) => {
+//   instance.delete('follow/' + userID)
+//     .then(response => {
+//       if (response.data.resultCode == 0) {
+//
+//       }
+//     })
+// }

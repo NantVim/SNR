@@ -21,6 +21,6 @@ let mapDispatchToProps = state => ({
   profile: state.profilePage.profile
 });
 
-let WithUserUrlDataContainerComponent =  withRouter(ProfileContainer)
+let WithUserUrlDataContainerComponent =  withRouter(ProfileContainer);
 
 export default connect(mapDispatchToProps, {setUserProfile})(WithUserUrlDataContainerComponent);

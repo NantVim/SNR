@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
@@ -51,19 +53,41 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const follow = (userID) => {
-  return {type: FOLLOW, userID}
-};
-
-export const unfollow = (userID) => {
-  return {type: UNFOLLOW, userID}
-};
-
-export const setUsers = users => {
-  return {type: SET_USERS, users}
-}
+export const followSuccess = userID => ({type: FOLLOW, userID});
+export const unfollowSuccess = userID => ({type: UNFOLLOW, userID});
+export const setUsers = users => ({type: SET_USERS, users});
 
 export const toggleIsFollowingProgress = isFetching =>
   ({type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching});
+
+export const getUsersThunkCreator = () => {
+  return (dispatch) => {
+    usersAPI.getUsers().then(data => {
+      dispatch(setUsers(data));
+    });
+  }
+};
+
+export const follow = userID => {
+  return (dispatch) => {
+    usersAPI.follow(userID)
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(followSuccess(userID));
+        }
+      })
+  }
+};
+
+export const unfollow = userID => {
+  return (dispatch) => {
+    usersAPI.unfollow(userID)
+      .then(response => {
+        if (response.data.resultCode === 0) {
+          dispatch(unfollowSuccess(userID));
+        }
+      })
+  }
+};
 
 export default usersReducer;

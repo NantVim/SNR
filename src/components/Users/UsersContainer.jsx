@@ -1,14 +1,11 @@
 import React from "react";
 import {connect} from "react-redux";
 import Users from "./Users";
-import {follow, setUsers, unfollow} from "../../redux/usersReducer";
-import {getUsers} from "../../api/api";
+import {follow, getUsersThunkCreator, unfollow} from "../../redux/usersReducer";
 
 class UsersApiContainer extends React.Component{
   componentDidMount() {
-    getUsers().then(data => {
-      this.props.setUsers(data)
-    })
+    this.props.getUsersThunkCreator();
   }
 
   render() {
@@ -23,6 +20,6 @@ class UsersApiContainer extends React.Component{
 let mapStateToProps = state => ({users: state.usersPage.users});
 
 const UserContainer = connect(mapStateToProps,
-  {follow, unfollow, setUsers,})(UsersApiContainer);
+  {follow, unfollow, getUsersThunkCreator})(UsersApiContainer);
 
 export default UserContainer;
